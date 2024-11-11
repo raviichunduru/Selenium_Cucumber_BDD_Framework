@@ -1,5 +1,6 @@
 Feature: Login page automation of saucedemo application
 
+@smoke
 Scenario Outline: Login is successful with valid credentials
 Given User is on login page
 When User enters valid "<username>" and "<password>"
