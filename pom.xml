@@ -9,13 +9,19 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <java.version>21</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven-compiler-plugin>3.13.0</maven-compiler-plugin>
+        <maven-surefire-plugin>3.5.0</maven-surefire-plugin>
+        <maven-site-plugin>4.0.0-M16</maven-site-plugin>
+        <maven-surefire-report-plugin>3.5.0</maven-surefire-report-plugin>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <cucumber-java-version>7.20.1</cucumber-java-version>
         <cucumber-testng-version>7.20.1</cucumber-testng-version>
         <testng-version>7.10.2</testng-version>
         <selenium-java-version>4.26.0</selenium-java-version>
+        <cucumber.filter.tags>@e2e</cucumber.filter.tags>
     </properties>
 
     <dependencies>
@@ -49,4 +55,50 @@
 
     </dependencies>
 
+    <build>
+        <plugins>
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin}</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin}</version>
+                <configuration>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                    <systemPropertyVariables>
+                        <cucumber.filter.tags>${cucumber.filter.tags}</cucumber.filter.tags>
+                    </systemPropertyVariables>
+                </configuration>
+
+            </plugin>
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-site-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven-site-plugin}</version>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-report-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>${maven-surefire-report-plugin}</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
