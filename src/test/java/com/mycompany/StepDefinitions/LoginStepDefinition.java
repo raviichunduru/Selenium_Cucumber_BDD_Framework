@@ -4,22 +4,27 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebDriver;
-
 import static com.mycompany.PageObjects.LoginPage.getLoginPageInstance;
+import static driver.Driver.setUp;
+import static driver.Driver.tearDown;
 
 public class LoginStepDefinition {
-  static WebDriver driver;
 
   @Given("User is on login page")
   public void user_is_on_login_page() {
-    getLoginPageInstance().setUp();
+    setUp();
   }
   @When("User enters valid {string} and {string}")
   public void user_enters_valid_and(String userName, String password) {
    getLoginPageInstance()
      .enterUserName(userName)
      .enterPassword(password);
+  }
+  @When("User enters valid username and password")
+  public void user_enters_valid_username_and_password() {
+    getLoginPageInstance()
+      .enterUserName("standard_user")
+      .enterPassword("secret_sauce");
   }
   @And("Click on login button")
   public void click_on_login_button() {
@@ -31,6 +36,6 @@ public class LoginStepDefinition {
   }
   @And("Close the browser")
   public void close_the_browser() {
-    getLoginPageInstance().tearDown();
+    tearDown();
   }
 }
