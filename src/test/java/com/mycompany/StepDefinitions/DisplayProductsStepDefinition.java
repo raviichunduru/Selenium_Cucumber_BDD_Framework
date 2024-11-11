@@ -1,18 +1,15 @@
 package com.mycompany.StepDefinitions;
 
-import com.mycompany.PageObjects.HomePage;
-import driver.DriverManager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.testng.Assert;
 
-import static com.mycompany.PageObjects.HomePage.assertThatProductDisplayed;
-import static com.mycompany.PageObjects.HomePage.clickAllItemsLink;
-import static com.mycompany.PageObjects.HomePage.clickOpenMenuHamburger;
-import static com.mycompany.PageObjects.HomePage.clickSauceLabsBackPack;
-import static com.mycompany.PageObjects.ProductDetailPage.assertThatProductAddedToCart;
-import static com.mycompany.PageObjects.ProductDetailPage.clickAddToCartButton;
+import static PageObjects.HomePage.assertThatProductDisplayed;
+import static PageObjects.HomePage.clickAllItemsLink;
+import static PageObjects.HomePage.clickOpenMenuHamburger;
+import static PageObjects.HomePage.clickSauceLabsBackPack;
+import static PageObjects.ProductDetailPage.assertThatProductAddedToCart;
+import static PageObjects.ProductDetailPage.clickAddToCartButton;
 
 public class DisplayProductsStepDefinition {
 
