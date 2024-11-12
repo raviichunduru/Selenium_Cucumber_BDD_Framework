@@ -1,0 +1,39 @@
+# This is a Docker Compose configuration for setting up a Jenkins server with necessary configurations.
+
+version: '3.8'
+
+services:
+  jenkins:
+    # The image to use for the Jenkins container, here it is the official Jenkins LTS version.
+    image: jenkins/jenkins:lts
+    # The container is named "jenkins-server" for easy reference.
+    container_name: jenkins-server
+    # Expose Jenkins on port 8080 (the default Jenkins UI port) and port 50000 for agent communication.
+    ports:
+      - "8080:8080"  # Exposes the Jenkins UI on port 8080
+      - "50000:50000"  # Exposes the port for Jenkins agent communication
+    # Volumes to persist Jenkins data even if the container is stopped or removed.
+    volumes:
+      - jenkins_home:/var/jenkins_home  # Persists Jenkins home directory, ensuring data is retained between container restarts
+    # Set environment variables for Jenkins configuration
+    environment:
+      # Skip the setup wizard during Jenkins setup for automation.
+      JENKINS_OPTS: "--httpPort=8080"
+      # Set Java options to skip the setup wizard on first launch (optional).
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
+    # This specifies that the container should be restarted unless explicitly stopped.
+    restart: unless-stopped
+    # Run the container as the root user to allow package installation.
+    user: root  # This is necessary for installing additional packages in the container
+    # The command to execute upon container startup. Updates apt-get, installs git and maven, and then starts Jenkins.
+    command: >
+      /bin/bash -c "
+      apt-get update &&  # Updates the package list to ensure the system is up to date
+      apt-get install -y git maven &&  # Installs git and maven in the container
+      exec /usr/local/bin/jenkins.sh  # Executes the Jenkins server
+      "
+
+# Defining a volume to persist Jenkins data.
+volumes:
+  jenkins_home:
+    driver: local  # Local driver is used to create the volume on the host machine.
