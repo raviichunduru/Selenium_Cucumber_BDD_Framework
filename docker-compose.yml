@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins-server
+    ports:
+      - "8080:8080"  # Expose Jenkins on port 8080
+      - "50000:50000"  # Port for Jenkins agent communication
+    volumes:
+      - jenkins_home:/var/jenkins_home  # Persist Jenkins data
+    environment:
+      JENKINS_OPTS: "--httpPort=8080"
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false" # Skip initial setup wizard (optional)
+    restart: unless-stopped
+    user: root  # Run as root to install packages
+    command: >
+      /bin/bash -c "
+      apt-get update &&
+      apt-get install -y git maven &&
+      exec /usr/local/bin/jenkins.sh
+      "
+
+volumes:
+  jenkins_home:
+    driver: local
