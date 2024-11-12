@@ -19,9 +19,3 @@ Feature: Validate if user is displayed products to order
     And Click on add to cart button
     Then Product is added to cart
     And Close the browser
-
-
-
-
-
-
