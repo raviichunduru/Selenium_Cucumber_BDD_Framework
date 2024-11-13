@@ -9,7 +9,6 @@ public class Driver {
     if(Objects.isNull(DriverManager.getDriver())){
       DriverManager.setDriver(DriverFactory.getDriver());
       DriverManager.getDriver().manage().window().maximize();
-      DriverManager.getDriver().get("https://www.saucedemo.com/v1/");
     }
   }
 

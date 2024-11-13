@@ -11,11 +11,10 @@ Feature: Validate if user is displayed products to order
     When User click on hamburger menu
     And Click on all items link
     Then User is displayed products
-    And Close the browser
+
 
   @e2e
   Scenario: Check if user is able to add product to cart
     When User navigated to products page
     And Click on add to cart button
     Then Product is added to cart
-    And Close the browser

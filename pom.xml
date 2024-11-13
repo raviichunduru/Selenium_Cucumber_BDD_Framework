@@ -21,7 +21,7 @@
         <cucumber-testng-version>7.20.1</cucumber-testng-version>
         <testng-version>7.10.2</testng-version>
         <selenium-java-version>4.26.0</selenium-java-version>
-        <cucumber.filter.tags>@e2e</cucumber.filter.tags>
+        <cucumber.filter.tags>@smoke</cucumber.filter.tags>
     </properties>
 
     <dependencies>

@@ -6,7 +6,6 @@ Feature: Login page automation of saucedemo application
     When User enters valid "<username>" and "<password>"
     And Click on login button
     Then User is navigated to Home page
-    And Close the browser
 
     Examples:
       | username                | password     |

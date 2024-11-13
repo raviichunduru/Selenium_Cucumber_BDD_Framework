@@ -19,7 +19,6 @@ public class ProductDetailPage {
   }
 
   public static void assertThatProductAddedToCart () {
-    //WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
     Assert.assertTrue(DriverManager.getDriver().findElement(BTN_REMOVE).isDisplayed());
   }
 }

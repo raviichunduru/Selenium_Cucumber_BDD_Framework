@@ -1,5 +1,9 @@
 package com.mycompany.StepDefinitions;
 
+import driver.Driver;
+import driver.DriverManager;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,9 +14,14 @@ import static driver.Driver.tearDown;
 
 public class LoginStepDefinition {
 
+  @Before
+  public void initDriver () {
+    setUp();
+  }
+
   @Given("User is on login page")
   public void user_is_on_login_page() {
-    setUp();
+    DriverManager.getDriver().get("https://www.saucedemo.com/v1/");
   }
 
   @When("User enters valid {string} and {string}")
@@ -39,8 +48,8 @@ public class LoginStepDefinition {
     getLoginPageInstance().assertThatHomePageLoaded();
   }
 
-  @And("Close the browser")
-  public void close_the_browser() {
+  @After
+  public void quitDriver() {
     tearDown();
   }
 

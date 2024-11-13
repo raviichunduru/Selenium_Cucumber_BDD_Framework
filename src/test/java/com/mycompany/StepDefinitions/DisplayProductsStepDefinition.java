@@ -1,5 +1,7 @@
 package com.mycompany.StepDefinitions;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,8 +12,15 @@ import static PageObjects.HomePage.clickOpenMenuHamburger;
 import static PageObjects.HomePage.clickSauceLabsBackPack;
 import static PageObjects.ProductDetailPage.assertThatProductAddedToCart;
 import static PageObjects.ProductDetailPage.clickAddToCartButton;
+import static driver.Driver.setUp;
+import static driver.Driver.tearDown;
 
 public class DisplayProductsStepDefinition {
+
+  @Before
+  public void initDriver () {
+    setUp();
+  }
 
   @When("User click on hamburger menu")
   public void user_click_on_hamburger_menu() {
@@ -41,5 +50,10 @@ public class DisplayProductsStepDefinition {
   @Then("Product is added to cart")
   public void product_is_added_to_cart() {
     assertThatProductAddedToCart ();
+  }
+
+  @After
+  public void quitDriver() {
+    tearDown();
   }
 }
